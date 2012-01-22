@@ -1,0 +1,9 @@
+<h1><%= event.name %></h1>
+<h2><%= event.description %></h2>
+<p>
+  <% if event.text %>
+    <%= event.text %>
+  <% elsif event.partial %>
+    <%= render :partial => event.partial, :locals => {:event => event}.merge(event.locals) %>
+  <% end %>
+</p>

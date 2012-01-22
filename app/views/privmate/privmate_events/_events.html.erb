@@ -1,0 +1,4 @@
+<% @events.each do |event| %>
+  <% event_template = PrivMate.config.a_events[event.id] %>
+  <%= render :partial => "event", :locals => {:event => event_template} %>
+<% end %>
