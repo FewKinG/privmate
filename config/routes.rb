@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   namespace :privmate do
 
-    resources :privmate_events, :only => [ :index, :show ]
+    resources :events, :only => [ :index, :show ]
+
+    match "info" => "privmate#info"
 
   end
 

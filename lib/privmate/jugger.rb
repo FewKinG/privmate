@@ -9,7 +9,7 @@ module Privmate
       Juggernaut.publish([channel], {
 	:name => event.name,
 	:description => event.description,
-	:url => Rails.application.routes.url_helpers.privmate_privmate_event_path(event.id)
+	:url => Rails.application.routes.url_helpers.privmate_event_path(event.id)
       })
     end
 

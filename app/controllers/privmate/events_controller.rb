@@ -1,5 +1,5 @@
 module Privmate
-  class PrivmateEventsController < ApplicationController
+  class EventsController < ApplicationController
     
     def index
       @events = PrivMate.config.event_class.find_events
