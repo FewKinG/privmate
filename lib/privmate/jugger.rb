@@ -13,6 +13,12 @@ module Privmate
       })
     end
 
+    def self.prepare_channel(user_id)
+      return unless Juggernaut
+      channel = ["/privmate/" + user_id] 
+      Juggernaut.create_key(channel)
+    end
+
   end
 
 end

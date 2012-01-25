@@ -4,6 +4,10 @@ module Privmate
 
     cattr_accessor :config
 
+    def self.prepare_channel(user_id) 
+      Jugger.prepare_channel(user_id)
+    end
+
     def self.setup(&block)
       self.config = Privmate::Config.build(&block)
     end

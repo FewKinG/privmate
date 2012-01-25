@@ -91,6 +91,7 @@ function PrivmateButton(element, options) {
 
   var juggerPort = options["juggerPort"] ? options["juggerPort"] : 8080
   var user_id = options["userId"] ? options["userId"] : ":all:"
+  var juggerKey = options["juggerKey"]
 
   me.cb_on_event = options["onEvent"]
   me.cb_button_click = options["onClick"]
@@ -115,6 +116,8 @@ function PrivmateButton(element, options) {
 
   me.juggernaut = new Juggernaut({port: juggerPort})
   
-  jugger.subscribe("/privmate/" + user_id, me.receiveEvent) 
+  jugger.subscribe("/privmate/" + user_id, me.receiveEvent, {
+    key: juggerKey  
+  }) 
 
 }
