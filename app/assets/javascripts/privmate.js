@@ -37,6 +37,12 @@ function PrivmateButton(element, options) {
     me.element.removeClass('active')
   }
 
+  me.unload = function() {
+    me.clearEvents()
+    me.element.unbind('click')
+    jugger.unsubscribe("/privmate/" + me.user_id)
+  }
+
   me.addEvent = function(name, description, url) {
     if (me.event_container) {
       var e = me.event_container
@@ -90,7 +96,6 @@ function PrivmateButton(element, options) {
   }
 
   var juggerPort = options["juggerPort"] ? options["juggerPort"] : 8080
-  var user_id = options["userId"] ? options["userId"] : ":all:"
   var juggerKey = options["juggerKey"]
 
   me.cb_on_event = options["onEvent"]
@@ -100,11 +105,14 @@ function PrivmateButton(element, options) {
   me.cb_event_click = options["onEventClick"]
 
   me.element = element
+  me.user_id = options["userId"] ? options["userId"] : ":all:"
   me.highlight_time = options["highlightTime"] ? options["highlightTime"] : 10
   me.list_events = options["listEvents"] ? options["listEvents"] : false
   me.event_container = options["eventContainer"] ? options["eventContainer"] : element
   me.privmate_container = options["privmateContainer"] ? options["privmateContainer"] : me.event_container
   me.list_event_template = options["listEventTemplate"] ? options["listEventTemplate"] : element
+
+  me.element.unbind('click')
 
   me.element.click(function() {
     if (me.cb_button_click) {
@@ -116,7 +124,7 @@ function PrivmateButton(element, options) {
 
   me.juggernaut = new Juggernaut({port: juggerPort})
   
-  jugger.subscribe("/privmate/" + user_id, me.receiveEvent, {
+  jugger.subscribe("/privmate/" + me.user_id, me.receiveEvent, {
     key: juggerKey  
   }) 
 

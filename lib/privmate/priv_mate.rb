@@ -12,8 +12,9 @@ module Privmate
       self.config = Privmate::Config.build(&block)
     end
 
-    def self.trigger_event(id)
-      event = config.event_class.new(:id => id, :user_id => config.event_class.current_user.id, :created => Time.now)
+    def self.trigger_event(id, user = nil)
+      user ||= config.event_class.current_user
+      event = config.event_class.new(:id => id, :user_id => user.id, :created => Time.now)
       if event.save
 	Jugger.publish(event)
       end
