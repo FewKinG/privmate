@@ -40,7 +40,7 @@ function PrivmateButton(element, options) {
   me.unload = function() {
     me.clearEvents()
     me.element.unbind('click')
-    jugger.unsubscribe("/privmate/" + me.user_id)
+    jugger.unsubscribe(juggerChan + "/privmate/" + me.user_id)
   }
 
   me.addEvent = function(name, description, url) {
@@ -98,6 +98,7 @@ function PrivmateButton(element, options) {
   var juggerPort = options["juggerPort"] ? options["juggerPort"] : 8080
   var juggerHost = options["juggerHost"]
   var juggerKey = options["juggerKey"]
+  var juggerChan = options["juggerChan"] ? options["juggerChan"] : ""
 
   me.cb_on_event = options["onEvent"]
   me.cb_button_click = options["onClick"]
@@ -128,7 +129,7 @@ function PrivmateButton(element, options) {
     port: juggerPort
   })
   
-  jugger.subscribe("/privmate/" + me.user_id, me.receiveEvent, {
+  jugger.subscribe(juggerChan + "/privmate/" + me.user_id, me.receiveEvent, {
     key: juggerKey  
   }) 
 
